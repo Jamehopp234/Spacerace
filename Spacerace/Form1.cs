@@ -65,6 +65,7 @@ namespace Spacerace
             noButton.Visible = false;
             noButton.Enabled = false;
             winLabel.Text = "";
+          
 
             if (upDown == true && player1.Y < 550 - player1.Height)
             {
@@ -161,10 +162,11 @@ namespace Spacerace
                 }
                 if (player2.IntersectsWith(balls[i]))
                 {
+                    Explosion.Play();
                     player2.Y = 550;
                     balls.RemoveAt(i);
                     ballSpeeds.RemoveAt(i);
-                    Explosion.Play();
+                   
 
                 }
             }
@@ -210,6 +212,7 @@ namespace Spacerace
             if(P2Score == 3)
             {
                 Victory.Play();
+                
                 gameLoop.Stop();
                 winLabel.Text = "Player 2 Wins    Play Again?";
                 yesButton.Visible = true;
@@ -295,6 +298,9 @@ namespace Spacerace
 
         private void yesButton_Click(object sender, EventArgs e)
         {
+         
+            player1.Y = 550;
+            player2.Y = 550;
             yesButton.Visible = false;
             yesButton.Enabled = false;
             noButton.Visible = false;
@@ -314,7 +320,12 @@ namespace Spacerace
 
         private void playButton_Click(object sender, EventArgs e)
         {
+            player1.Y = 0;
+            player2.Y = 0;
+            P1Score--;
+            P2Score--;
             gameLoop.Start();
+           
         }
     }
 
